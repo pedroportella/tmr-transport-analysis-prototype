@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { faHospital, faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
 import { MapLibreScenarioMap } from '@tmr/map-engine';
 import { createMockTmrScenarioService, type CorridorLinkProperties, type ScenarioDataset, type TimePeriod, type TransportLayerId } from '@tmr/services-tmr';
 import { Accordion, Button, Card, CheckboxGroup, Layout, RadioGroup, SelectInput } from '@tmr/ui-library';
@@ -18,16 +19,6 @@ const timePeriodOptions = [
   { id: 'period-inter', label: 'Inter-peak', value: 'INTER_PEAK' },
   { id: 'period-pm', label: 'PM peak', value: 'PM_PEAK' }
 ] satisfies { id: string; label: string; value: TimePeriod }[];
-
-const sidebar = {
-  heading: { label: 'TMR analysis', route: '/' },
-  defaultOpen: true,
-  items: [
-    { label: 'Scenario explorer', route: '/' },
-    { label: 'Corridor insights', route: '#corridor-insights' },
-    { label: 'Map workspace', route: '#map-workspace' }
-  ]
-};
 
 export function App() {
   const [dataset, setDataset] = useState<ScenarioDataset | null>(null);
@@ -67,7 +58,18 @@ export function App() {
   }
 
   return (
-    <Layout header={{ title: 'TMR Transport Scenario Explorer', baseUrl }} sidebar={sidebar}>
+    <Layout
+      header={{
+        title: 'TMR Transport Scenario Explorer',
+        baseUrl,
+        items: [
+          { label: 'Analyst user', href: '/home', icon: faUser },
+          { label: 'Transport Analysis Unit', href: '/provider-list', icon: faHospital },
+          { label: 'Log out', href: '/', icon: faRightFromBracket }
+        ]
+      }}
+      hideSidebar
+    >
       <section className="qld__body">
         <section className="dcir__page-header">
           <div className="container-fluid">

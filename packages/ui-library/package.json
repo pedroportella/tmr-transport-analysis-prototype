@@ -15,6 +15,9 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "latest",
+    "@fortawesome/free-solid-svg-icons": "latest",
+    "@fortawesome/react-fontawesome": "latest",
     "@tmr/services-tmr": "workspace:*",
     "@tmr/ui-assets": "workspace:*",
     "@tmr/utils": "workspace:*",

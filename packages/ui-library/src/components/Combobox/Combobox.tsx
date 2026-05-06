@@ -2,13 +2,12 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import classNames from "../../utils/classNames";
 import "./Combobox.css";
 import { Icon } from "./../Icon/Icon";
 
 export type ComboboxItem = unknown;
-
-const searchIcon = { iconName: "search" } as const;
 
 type RenderItemArgs<T> = {
   item: T;
@@ -144,7 +143,7 @@ export function Combobox<T>({
         <div className="qld__margin-t-p qld__search-form__inner">
           <span className={classNames("oh-loading-wheel", loading ? "show" : "hide")} />
           {!loading && (
-            <Icon className="qld__search-icon" icon={searchIcon} />
+            <Icon className="qld__search-icon" icon={faMagnifyingGlass} />
           )}
           <input
             ref={inputRef}

@@ -5,7 +5,7 @@ import React from "react";
 import { Icon } from "./../Icon/Icon";
 import SvgIconsUrl from "@tmr/ui-assets/icons/svg-icons-url";
 import qgovLogoUrlBrand from "@tmr/ui-assets/logos/header-logo-qgov-url";
-import type { IconDefinition } from "./../Icon/Icon";
+import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 export type HeaderCtaItem = {
   label: string;
