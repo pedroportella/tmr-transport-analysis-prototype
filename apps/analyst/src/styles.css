@@ -1,0 +1,18 @@
+body { margin: 0; }
+* { box-sizing: border-box; }
+.tmr-loading { min-height: 100vh; display: grid; place-items: center; font-family: Arial, Helvetica, sans-serif; }
+.tmr-scenario-description { color: var(--tmr-colour-muted); line-height: 1.5; }
+.tmr-page-action { display: flex; align-items: flex-end; justify-content: flex-start; margin-top: 1rem; }
+.tmr-control-stack { gap: 1.1rem; }
+.tmr-kpi-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+.tmr-kpi-grid .qld__card__description { color: var(--QLD-color-light__heading); font-size: 1.6rem; font-weight: 700; }
+.tmr-map-panel { min-width: 0; }
+.tmr-map-panel .tmr-map { border-radius: var(--tmr-radius-md); }
+
+@media (max-width: 64rem) {
+  .tmr-kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 40rem) {
+  .tmr-kpi-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "@tmr/ui-library",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./styles.css": "./src/styles.css",
+    "./theme.scss": "./src/theme/index.scss"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint src --ext .ts,.tsx",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@tmr/services-tmr": "workspace:*",
+    "@tmr/ui-assets": "workspace:*",
+    "@tmr/utils": "workspace:*",
+    "react": "latest",
+    "react-dom": "latest"
+  }
+}
