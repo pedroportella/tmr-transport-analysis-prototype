@@ -40,6 +40,137 @@ packages/utils
   Formatting and calculation helpers.
 ```
 
+## QGDS UI Components, Theme And Layout
+
+The prototype uses QGDS, the Queensland Government Design System, as the foundation for its visual language, layout classes, typography, form styling, cards, buttons, accordion behaviour, header and footer treatment.
+
+Local design-system assets are split across three packages:
+
+```txt
+packages/ui-library
+  React components, form fields, layout shell, cards, buttons, accordion and icons.
+
+packages/ui-tokens
+  Primitive, QGDS and palette token sources used by the theme SCSS.
+
+packages/ui-assets
+  Logo and SVG sprite assets used by header/navigation/icon components.
+```
+
+The analyst app imports the theme in `apps/analyst/src/main.tsx`:
+
+```ts
+import '@tmr/ui-tokens/styles.css';
+import '@tmr/ui-library/theme.scss';
+import '@tmr/ui-library/styles.css';
+```
+
+The primary theme entrypoint is:
+
+```txt
+packages/ui-library/src/theme/index.scss
+```
+
+The default palette and design token wiring is in:
+
+```txt
+packages/ui-library/src/theme/css/qld-default.scss
+```
+
+That SCSS imports:
+
+- primitive tokens
+- QGDS-level tokens
+- default Queensland Government palette tokens
+- root CSS variable mappings
+- light and dark mode variable mappings
+- component defaults
+
+### Component Usage
+
+Prefer shared components from `@tmr/ui-library` when building application UI:
+
+```ts
+import {
+  Accordion,
+  Button,
+  Card,
+  CheckboxGroup,
+  Layout,
+  RadioGroup,
+  SelectInput
+} from '@tmr/ui-library';
+```
+
+Use the shared `Layout` component for the application shell so the pre-header, header, main region and footer remain consistent.
+
+Use QGDS class names and grid utilities for page content:
+
+```tsx
+<section className="qld__body">
+  <section className="tmr__page-header">
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-xs-12 col-md-9">...</div>
+      </div>
+    </div>
+  </section>
+</section>
+```
+
+Note: some inherited class names are retained because they are part of the imported theme surface. Treat them as design-system implementation details rather than application-domain names.
+
+### Styling Rules
+
+- Prefer tokens, theme variables and existing QGDS utility classes over local one-off CSS.
+- Keep shared UI components presentational; application state should stay in `apps/analyst`.
+- Keep local app CSS focused on TMR-specific layout concerns such as map sizing, KPI grid arrangement and workflow spacing.
+- Do not restyle `qld__header`, `qld__footer`, `container-fluid`, `row` or shared form/card/button classes in app CSS unless there is a deliberate design-system change.
+- Add reusable UI elements to `packages/ui-library` instead of duplicating markup in the app.
+- Keep raw assets in `packages/ui-assets` and import them through package exports.
+
+### QGDS References
+
+Queensland Government Design System:
+
+- https://www.designsystem.qld.gov.au
+
+QGDS components:
+
+- https://www.designsystem.qld.gov.au/components
+
+QGDS Vanilla Storybook:
+
+- https://qld-gov-au.github.io/qgds-vanilla/storybook/?path=/story/0-3-templates-and-patterns-landing--landing&globals=brand:main-qld-corporate
+
+QGDS Vanilla default look and feel:
+
+- https://qld-gov-au.github.io/qgds-vanilla/storybook/iframe.html?globals=&args=&id=0-3-templates-and-patterns-landing--landing&viewMode=story
+
+Cards:
+
+- https://www.designsystem.qld.gov.au/components/cards
+
+Tabs:
+
+- https://www.designsystem.qld.gov.au/components/tabs
+
+QGDS Vanilla repository:
+
+- https://github.com/qld-gov-au/qgds-vanilla
+
+QGDS design tokens:
+
+- https://github.com/qld-gov-au/qgds-tokens
+
+QGDS Bootstrap:
+
+- https://github.com/qld-gov-au/qgds-bootstrap5
+
+QGDS UI Kit:
+
+- https://www.figma.com/design/qKsxl3ogIlBp7dafgxXuCA/QGDS-UI-kit
+
 ## Environment
 
 Create `apps/analyst/.env.local`:
