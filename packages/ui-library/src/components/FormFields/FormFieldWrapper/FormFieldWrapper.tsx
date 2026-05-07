@@ -72,7 +72,10 @@ export const FormFieldWrapper: React.FC<FormFieldWrapperProps> = ({
 
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
-          ? React.cloneElement(child as React.ReactElement<any>, {
+          ? React.cloneElement(child as React.ReactElement<{
+              "aria-describedby"?: string;
+              "aria-invalid"?: boolean;
+            }>, {
               "aria-describedby": describedBy || undefined,
               "aria-invalid": !!error,
             })

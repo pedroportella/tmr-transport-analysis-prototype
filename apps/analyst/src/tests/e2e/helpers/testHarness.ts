@@ -6,9 +6,9 @@ type Fixtures = {
 };
 
 export const test = base.extend<Fixtures>({
-  explorer: async ({ page }, use) => {
+  explorer: async ({ page }, provide) => {
     page.setDefaultTimeout(12_000);
-    await use(new TmrScenarioExplorerPO(page));
+    await provide(new TmrScenarioExplorerPO(page));
   }
 });
 

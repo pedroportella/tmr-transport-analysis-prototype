@@ -149,12 +149,13 @@ export const Accordion: React.FC<AccordionProps> = (props) => {
 
     // Convenience: group open-all
     if (props.defaultOpenAll) {
-      return new Set(resolvedItems.map((it) => it.id!).filter(Boolean));
+      return new Set(resolvedItems.map((it) => it.id).filter(Boolean));
     }
 
     // Convenience: single open
     if (!isGroupProps(props) && props.defaultOpen) {
-      return new Set([resolvedItems[0]?.id!].filter(Boolean));
+      const firstId = resolvedItems[0]?.id;
+      return firstId ? new Set([firstId]) : new Set<string>();
     }
 
     // Default: CLOSED
@@ -162,7 +163,7 @@ export const Accordion: React.FC<AccordionProps> = (props) => {
   });
 
   const allOpen =
-    resolvedItems.length > 0 && resolvedItems.every((it) => openIds.has(it.id!));
+    resolvedItems.length > 0 && resolvedItems.every((it) => openIds.has(it.id));
 
   const toggleOne = (id: string) => {
     setOpenIds((prev) => {

@@ -30,7 +30,6 @@ export function App() {
 
   useEffect(() => {
     let mounted = true;
-    setLoadError(null);
     service
       .getScenarioDataset()
       .then((nextDataset) => {

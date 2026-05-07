@@ -46,7 +46,6 @@ export const Textarea: React.FC<TextareaProps> = ({
   filled = false,
   rows = 3,
   cols,
-  maxLength: _maxLength, // accepted for API compatibility, intentionally unused
   alert,
   autoComplete = "off",
 }) => {

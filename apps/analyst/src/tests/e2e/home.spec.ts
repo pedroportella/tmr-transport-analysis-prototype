@@ -1,4 +1,4 @@
-import { expect, test } from './helpers/testHarness';
+import { test } from './helpers/testHarness';
 
 test.describe('TMR scenario explorer', () => {
   test('loads the mocked API dataset into the shell', async ({ explorer }) => {

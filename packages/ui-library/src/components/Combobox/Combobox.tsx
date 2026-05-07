@@ -78,10 +78,6 @@ export function Combobox<T>({
 
   const text = value ?? internalValue;
 
-  useEffect(() => {
-    if (value !== undefined) setInternalValue(value);
-  }, [value]);
-
   // Close on outside click
   useEffect(() => {
     const onDocClick = (e: MouseEvent) => {

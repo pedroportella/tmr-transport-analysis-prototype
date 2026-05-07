@@ -10,19 +10,19 @@ function shouldUseApiMocks() {
 
 export function enableApiMocks() {
   if (!shouldUseApiMocks()) {
-    console.info("[MSW] (TMR) Skipping - NEXT_PUBLIC_USE_API_MOCKS is not 'true'");
+    console.warn("[MSW] (TMR) Skipping - NEXT_PUBLIC_USE_API_MOCKS is not 'true'");
     return Promise.resolve();
   }
 
   const ready = import("./browser")
     .then(({ worker }) => {
-      console.info("[MSW] (TMR) Starting browser worker...");
+      console.warn("[MSW] (TMR) Starting browser worker...");
       return worker.start({
         onUnhandledRequest: "warn",
       });
     })
     .then(() => {
-      console.info("[MSW] (TMR) Worker started");
+      console.warn("[MSW] (TMR) Worker started");
     })
     .catch((err: unknown) => {
       console.error("[MSW] (TMR) Failed to start:", err);
