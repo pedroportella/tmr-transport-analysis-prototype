@@ -5,6 +5,8 @@ import { describe, it, expect, vi } from "vitest";
 import { Button } from "./Button";
 
 describe("Button", () => {
+  const navigate = vi.fn();
+
   it("renders primary button and calls onClick", () => {
     const handleClick = vi.fn();
     render(<Button onClick={handleClick}>Click Me</Button>);
@@ -26,9 +28,9 @@ describe("Button", () => {
         About
       </Button>,
     );
-    const link = screen.getByRole("link");
-    expect(link).toHaveClass("qld__btn--tertiary");
-    expect(link).toHaveAttribute("href", "/about");
+    const buttonLink = screen.getByRole("button", { name: "About" });
+    expect(buttonLink).toHaveClass("qld__btn--tertiary");
+    expect(buttonLink).toHaveAttribute("href", "/about");
   });
 
   it("applies type correctly", () => {

@@ -1,15 +1,29 @@
 import { defineConfig } from "vite";
-import path from "path";
-import glob from "fast-glob";
+import fs from "node:fs";
+import path from "node:path";
+
+const findScssFiles = (directory: string): string[] =>
+  fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const entryPath = path.join(directory, entry.name);
+
+    if (entry.isDirectory()) {
+      return findScssFiles(entryPath);
+    }
+
+    return entry.isFile() && entry.name.endsWith(".scss") ? [entryPath] : [];
+  });
 
 const entries = Object.fromEntries(
-  glob.sync("src/scss/**/*.scss").map((file) => {
+  findScssFiles(path.resolve(import.meta.dirname, "src/scss")).map((file) => {
     const name = path.basename(file, ".scss");
-    return [name, path.resolve(__dirname, file)];
+    return [name, file];
   }),
 );
 
 export default defineConfig({
+  test: {
+    include: ["src/**/*.test.ts"],
+  },
   build: {
     rollupOptions: {
       input: entries,
