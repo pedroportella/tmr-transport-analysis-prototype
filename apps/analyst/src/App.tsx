@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { faHospital, faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
 import { MapLibreScenarioMap } from '@tmr/map-engine';
-import { createMockTmrScenarioService, type CorridorLinkProperties, type ScenarioDataset, type TimePeriod, type TransportLayerId } from '@tmr/services-tmr';
+import { createTmrScenarioService, type CorridorLinkProperties, type ScenarioDataset, type TimePeriod, type TransportLayerId } from '@tmr/services-tmr';
 import { Accordion, Button, Card, CheckboxGroup, Layout, RadioGroup, SelectInput } from '@tmr/ui-library';
 import { formatNumber } from '@tmr/utils';
 
-const service = createMockTmrScenarioService();
+const service = createTmrScenarioService();
 
 const layerLabels: Record<TransportLayerId, string> = {
   congestion: 'Congestion',
@@ -26,12 +26,20 @@ export function App() {
   const [activeLayers, setActiveLayers] = useState<TransportLayerId[]>(['congestion', 'publicTransport', 'freight']);
   const [timePeriod, setTimePeriod] = useState<TimePeriod>('AM_PEAK');
   const [selectedLink, setSelectedLink] = useState<CorridorLinkProperties | undefined>();
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   useEffect(() => {
     let mounted = true;
-    service.getScenarioDataset().then((nextDataset) => {
-      if (mounted) setDataset(nextDataset);
-    });
+    setLoadError(null);
+    service
+      .getScenarioDataset()
+      .then((nextDataset) => {
+        if (mounted) setDataset(nextDataset);
+      })
+      .catch((err: unknown) => {
+        if (!mounted) return;
+        setLoadError(err instanceof Error ? err.message : 'Unable to load transport scenario dataset.');
+      });
     return () => { mounted = false; };
   }, []);
 
@@ -52,6 +60,10 @@ export function App() {
     value: layerId,
     checked: activeLayers.includes(layerId)
   }));
+
+  if (loadError) {
+    return <main className="tmr-loading">{loadError}</main>;
+  }
 
   if (!dataset || !selectedKpis || !selectedScenario) {
     return <main className="tmr-loading">Loading transport scenario dataset...</main>;

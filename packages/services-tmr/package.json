@@ -1,1 +1,1 @@
-{"name":"@tmr/services-tmr","version":"0.1.0","private":true,"type":"module","exports":{".":"./src/index.ts"},"scripts":{"build":"tsc -p tsconfig.json","typecheck":"tsc -p tsconfig.json --noEmit","lint":"eslint src --ext .ts","test":"vitest run"}}
+{"name":"@tmr/services-tmr","version":"0.1.0","private":true,"type":"module","exports":{".":"./src/index.ts","./mocks":"./src/mocks/index.ts"},"scripts":{"build":"tsc -p tsconfig.json","typecheck":"tsc -p tsconfig.json --noEmit","lint":"eslint src --ext .ts","test":"vitest run"},"dependencies":{"msw":"latest"}}

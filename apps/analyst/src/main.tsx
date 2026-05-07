@@ -6,9 +6,12 @@ import '@tmr/ui-library/styles.css';
 import '@tmr/map-engine/styles.css';
 import './styles.css';
 import { App } from './App';
+import { enableApiMocks } from './mocks/enableApiMocks';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+enableApiMocks().then(() => {
+  ReactDOM.createRoot(document.getElementById('root')!).render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+});

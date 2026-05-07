@@ -82,7 +82,7 @@ const Footer = () => (
               present and future.
             </p>
 
-            <p className="qld__footer__copyrightMessage">© The State of Queensland 1995–2025</p>
+            <p className="qld__footer__copyrightMessage">© The State of Queensland 1995–2026</p>
           </div>
         </div>
       </div>

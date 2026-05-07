@@ -1,0 +1,135 @@
+{
+  "scenarios": [
+    {
+      "scenarioId": "base-2026",
+      "displayName": "Base 2026",
+      "summary": "Current committed network and demand profile.",
+      "horizonYear": 2026
+    },
+    {
+      "scenarioId": "growth-2031",
+      "displayName": "2031 Growth",
+      "summary": "Population and employment growth without major corridor intervention.",
+      "horizonYear": 2031
+    },
+    {
+      "scenarioId": "bus-priority",
+      "displayName": "Bus Priority Upgrade",
+      "summary": "Targeted bus priority and intersection improvements on key corridors.",
+      "horizonYear": 2031
+    }
+  ],
+  "kpis": [
+    {
+      "scenarioId": "base-2026",
+      "metrics": {
+        "averageDelayMinutes": 7.8,
+        "corridorTravelTimeMinutes": 42,
+        "populationWithinThirtyMinutes": 812000,
+        "freightReliabilityPercent": 76
+      }
+    },
+    {
+      "scenarioId": "growth-2031",
+      "metrics": {
+        "averageDelayMinutes": 11.4,
+        "corridorTravelTimeMinutes": 51,
+        "populationWithinThirtyMinutes": 768000,
+        "freightReliabilityPercent": 69
+      }
+    },
+    {
+      "scenarioId": "bus-priority",
+      "metrics": {
+        "averageDelayMinutes": 6.1,
+        "corridorTravelTimeMinutes": 37,
+        "populationWithinThirtyMinutes": 846000,
+        "freightReliabilityPercent": 81
+      }
+    }
+  ],
+  "network": {
+    "links": [
+      {
+        "linkId": "link-001",
+        "displayName": "Coronation Drive inbound",
+        "corridorName": "Western corridor",
+        "transportMode": "ROAD",
+        "baselineSpeedKph": 34,
+        "modelledSpeedKph": 41,
+        "trafficVolume": 4200,
+        "delayMinutes": 8.4,
+        "reliabilityPercent": 82,
+        "period": "AM_PEAK",
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [153.001, -27.469],
+            [153.016, -27.465],
+            [153.031, -27.461]
+          ]
+        }
+      },
+      {
+        "linkId": "link-002",
+        "displayName": "Busway south approach",
+        "corridorName": "South East busway",
+        "transportMode": "BUS",
+        "baselineSpeedKph": 43,
+        "modelledSpeedKph": 52,
+        "trafficVolume": 2600,
+        "delayMinutes": 4.1,
+        "reliabilityPercent": 91,
+        "period": "AM_PEAK",
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [153.025, -27.498],
+            [153.036, -27.486],
+            [153.048, -27.474]
+          ]
+        }
+      },
+      {
+        "linkId": "link-003",
+        "displayName": "Inner north freight link",
+        "corridorName": "Freight access",
+        "transportMode": "FREIGHT",
+        "baselineSpeedKph": 28,
+        "modelledSpeedKph": 31,
+        "trafficVolume": 1800,
+        "delayMinutes": 11.6,
+        "reliabilityPercent": 74,
+        "period": "PM_PEAK",
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [153.042, -27.438],
+            [153.035, -27.452],
+            [153.028, -27.468]
+          ]
+        }
+      },
+      {
+        "linkId": "link-004",
+        "displayName": "Moggill Road approach",
+        "corridorName": "Western corridor",
+        "transportMode": "ROAD",
+        "baselineSpeedKph": 24,
+        "modelledSpeedKph": 29,
+        "trafficVolume": 3700,
+        "delayMinutes": 13.2,
+        "reliabilityPercent": 68,
+        "period": "PM_PEAK",
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [152.992, -27.505],
+            [153.01, -27.494],
+            [153.023, -27.482]
+          ]
+        }
+      }
+    ]
+  }
+}
