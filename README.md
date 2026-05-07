@@ -15,6 +15,30 @@ The current application is a SEQ corridor scenario explorer. It demonstrates:
 - DTO mapping from backend-style JSON into frontend-ready objects.
 - Unit and Playwright e2e tests.
 
+## Position Description Alignment
+
+This prototype is structured to demonstrate the core capabilities expected from a frontend/geospatial visualisation specialist working with transport analysts, data scientists and backend engineers.
+
+| Role expectation | Prototype evidence |
+| --- | --- |
+| Modern frontend engineering with React and TypeScript | React + TypeScript workspace with a typed analyst app, reusable packages and strict package boundaries. |
+| Scalable frontend architecture | Application, service contracts, UI components, design tokens, assets, utilities and map implementation are split into focused pnpm workspace packages. |
+| Map-centric scenario analytics | The analyst app centres on a MapLibre scenario map, KPI cards, time-period controls, transport layers and link-level network details. |
+| Geospatial visualisation experience | `packages/map-engine` owns MapLibre setup, GeoJSON source management, line styling, layer visibility and map interaction handling. |
+| Backend API collaboration | `packages/services-tmr` defines DTOs, API-shaped service calls, endpoint configuration, error handling and DTO-to-frontend mapping. |
+| Mocked data workflow for iterative delivery | MSW intercepts the same API-shaped request used by the app and returns raw mock JSON before mapping it into frontend objects. |
+| Performance and maintainability awareness | Map logic is isolated for future optimisation, unit-tested with a mocked MapLibre surface, and documented with clear extension points. |
+| Enterprise UI standards | The shell, form controls, buttons, cards, accordion, header, footer, tokens and theme use QGDS-aligned shared packages. |
+| Quality standards | Workspace commands cover typecheck, lint, unit tests, Playwright e2e tests and production builds. |
+| Knowledge sharing and supportability | README documents environment setup, API mock flow, quality commands, QGDS usage, test strategy and handover notes. |
+
+Current deliberate prototype boundaries:
+
+- Authentication is represented only by shell/header placeholders and credentialed API calls; production SSO, route guards and role-based UI are future work.
+- Temporal analysis is represented by discrete time-period controls; animated playback is a future enhancement.
+- Large geospatial dataset handling is represented architecturally, but production-scale work should add vector tiles, layer chunking, feature-state updates, render profiling and data-volume budgets.
+- Scenario comparison currently uses scenario switching and KPI updates; side-by-side comparison and delta visualisation would be the next feature layer.
+
 ## Workspace Structure
 
 ```txt
