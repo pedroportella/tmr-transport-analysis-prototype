@@ -1,8 +1,17 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './helpers/testHarness';
 
-test('loads the scenario explorer', async ({ page }) => {
-  await page.goto('/');
-  await expect(page.getByRole('heading', { name: 'TMR Transport Scenario Explorer' })).toBeVisible();
-  await expect(page.getByText('Scenario controls')).toBeVisible();
-  await expect(page.getByLabel('Scenario')).toBeVisible();
+test.describe('TMR scenario explorer', () => {
+  test('loads the mocked API dataset into the shell', async ({ explorer }) => {
+    await explorer.goto();
+    await explorer.expectShell();
+    await explorer.expectScenarioControls();
+    await explorer.expectBusPriorityKpis();
+    await explorer.expectMapWorkspace();
+  });
+
+  test('updates KPI cards when a different scenario is selected', async ({ explorer }) => {
+    await explorer.goto();
+    await explorer.chooseGrowthScenario();
+    await explorer.expectGrowthScenarioKpis();
+  });
 });

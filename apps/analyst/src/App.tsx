@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { faHospital, faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
 import { MapLibreScenarioMap } from '@tmr/map-engine';
 import { createTmrScenarioService, type CorridorLinkProperties, type ScenarioDataset, type TimePeriod, type TransportLayerId } from '@tmr/services-tmr';
 import { Accordion, Button, Card, CheckboxGroup, Layout, RadioGroup, SelectInput } from '@tmr/ui-library';
@@ -75,8 +75,8 @@ export function App() {
         title: 'TMR Transport Scenario Explorer',
         baseUrl,
         items: [
-          { label: 'Analyst user', href: '/home', icon: faUser },
-          { label: 'Transport Analysis Unit', href: '/provider-list', icon: faHospital },
+          { label: 'Jane Smith', href: '/home', icon: faUser },
+          { label: 'Calendar', href: '/', icon: faCalendar },
           { label: 'Log out', href: '/', icon: faRightFromBracket }
         ]
       }}

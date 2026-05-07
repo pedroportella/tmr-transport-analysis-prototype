@@ -1,1 +1,1 @@
-{"root":["./src/app.test.tsx","./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/mocks/browser.ts","./src/mocks/enableapimocks.ts","./src/tests/e2e/home.spec.ts","./playwright.config.ts"],"version":"6.0.3"}
+{"root":["./src/app.test.tsx","./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/mocks/browser.ts","./src/mocks/enableapimocks.ts","./src/tests/e2e/home.spec.ts","./src/tests/e2e/helpers/tmrscenarioexplorerpo.ts","./src/tests/e2e/helpers/testharness.ts","./playwright.config.ts"],"version":"6.0.3"}
