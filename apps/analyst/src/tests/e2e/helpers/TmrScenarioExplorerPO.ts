@@ -10,8 +10,8 @@ export class TmrScenarioExplorerPO {
 
   async expectShell() {
     await expect(this.page.getByText('TMR Transport Scenario Explorer')).toBeVisible();
-    await expect(this.page.getByText('Analyst user')).toBeVisible();
-    await expect(this.page.getByRole('link', { name: 'Transport Analysis Unit', exact: true })).toBeVisible();
+    await expect(this.page.getByText('Jane Smith')).toBeVisible();
+    await expect(this.page.getByRole('link', { name: 'Calendar', exact: true })).toBeVisible();
     await expect(this.page.getByRole('contentinfo')).toContainText('Queensland Government');
   }
 
