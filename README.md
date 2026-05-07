@@ -34,7 +34,7 @@ packages/ui-assets
   Shared image and icon assets.
 
 packages/map-engine
-  MapLibre integration and transport map helpers.
+  MapLibre integration, mocked unit tests and transport map helpers.
 
 packages/utils
   Formatting and calculation helpers.
@@ -225,6 +225,21 @@ apps/analyst/vite.config.ts
 apps/analyst/playwright.config.ts
   Starts Vite with NEXT_PUBLIC_USE_API_MOCKS=true for e2e tests.
 
+packages/map-engine/src/MapLibreScenarioMap.tsx
+  MapLibre scenario network rendering component.
+
+packages/map-engine/src/MapLibreScenarioMap.test.tsx
+  Unit tests for MapLibre setup, source updates, layer visibility and link selection.
+
+packages/ui-library/vite.config.ts
+  Vitest DOM setup for React component tests.
+
+packages/ui-library/test/setup.ts
+  Local DOM matchers used by UI component tests.
+
+packages/ui-tokens/vite.config.mts
+  Token SCSS build input discovery and focused token test configuration.
+
 packages/services-tmr/src/TmrScenarioService.ts
   Real API-shaped frontend service adapter.
 
@@ -289,17 +304,29 @@ Run only the analyst production build:
 pnpm --filter @tmr/analyst exec vite build
 ```
 
-Run the TMR services unit tests:
+Run every workspace unit test:
+
+```bash
+pnpm test
+```
+
+Run focused package unit tests:
 
 ```bash
 pnpm --filter @tmr/services-tmr test
-```
-
-Run the analyst unit tests:
-
-```bash
+pnpm --filter @tmr/ui-tokens test
+pnpm --filter @tmr/ui-library test
+pnpm --filter @tmr/map-engine test
 pnpm --filter @tmr/analyst test
 ```
+
+Current unit coverage includes:
+
+- service DTO mapping, API error handling and mock endpoint behaviour
+- token exports, CSS variables and SCSS source entrypoints
+- shared UI components and form fields in a DOM test environment
+- MapLibre setup, source updates, layer visibility, load handling and link selection
+- analyst app loading behaviour
 
 Run Playwright e2e tests:
 
@@ -319,7 +346,13 @@ Run lint:
 pnpm lint
 ```
 
-Note: `pnpm test` runs every package test. The copied `ui-tokens` package currently has upstream generated token tests that expect generated CSS outputs and extra config/dependencies. Prefer the focused commands above for the current application handover unless `ui-tokens` test generation is restored.
+Run lint with automatic fixes:
+
+```bash
+pnpm lint --fix
+```
+
+The root `pnpm test` command is expected to pass across all tested workspace packages. `packages/map-engine` uses a mocked MapLibre implementation for unit tests so the suite can run without WebGL or network map tiles.
 
 ## Playwright E2E
 
@@ -355,6 +388,33 @@ Current tests cover:
 - Selecting the Growth scenario updates KPI values.
 - The map workspace and link detail panel render.
 
+## Unit Test Notes
+
+Vitest is used for package-level unit tests.
+
+`packages/ui-library` uses `jsdom` and a local setup file for DOM assertions:
+
+```txt
+packages/ui-library/vite.config.ts
+packages/ui-library/test/setup.ts
+```
+
+`packages/map-engine` also uses `jsdom`, but MapLibre itself is mocked in:
+
+```txt
+packages/map-engine/src/MapLibreScenarioMap.test.tsx
+```
+
+This keeps map tests fast and deterministic while still verifying the component calls MapLibre with the expected sources, layers and event handlers.
+
+`packages/ui-tokens` has focused tests for the token surface that exists in this prototype:
+
+```txt
+packages/ui-tokens/src/index.test.ts
+```
+
+The package excludes test files from TypeScript build/typecheck output, matching the other package build configs.
+
 Playwright artifacts:
 
 ```txt
@@ -382,8 +442,8 @@ Validate before handover:
 
 ```bash
 pnpm typecheck
-pnpm --filter @tmr/services-tmr test
-pnpm --filter @tmr/analyst test
+pnpm lint
+pnpm test
 pnpm --filter @tmr/analyst test:e2e
 pnpm --filter @tmr/analyst exec vite build
 ```
@@ -402,4 +462,5 @@ Vite may warn about large chunks because the prototype includes the QGDS theme, 
 - Keep map-specific implementation in `packages/map-engine`.
 - Add future mock endpoints as raw JSON under `packages/services-tmr/src/mocks/data` and expose them through MSW handlers.
 - Add DTO mapping tests whenever an API response shape changes.
+- Add map behaviour tests with the mocked MapLibre surface rather than relying on live map rendering in unit tests.
 - Extend Playwright through page objects/helpers instead of putting long selector flows directly in specs.
